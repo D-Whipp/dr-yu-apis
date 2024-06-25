@@ -1,6 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 
+// import info from './recipe.json' assert {type: 'json'};
+
 const app = express();
 const port = 3000;
 
@@ -19,6 +21,10 @@ app.get("/", (req, res) => {
 app.post("/recipe", (req, res) => {
   //Step 3: Write your code here to make this behave like the solution website.
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
+
+  // console.log('JSON: ', info)
+  res.render("index.ejs", {recipes: recipeJSON})
+
 });
 
 app.listen(port, () => {
