@@ -14,6 +14,16 @@ const recipeJSON =
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// custom middleware
+// const myLogger = function (req, res, next) {
+//   console.log("LOGGED");
+//   const parsedJSON = JSON.parse(recipeJSON)
+//   console.log("RECIPE LOGGER", parsedJSON)
+//   next();
+// }
+
+// app.use(myLogger);
+
 app.get("/", (req, res) => {
   res.render("index.ejs");
 });
@@ -22,7 +32,7 @@ app.post("/recipe", (req, res) => {
   //Step 3: Write your code here to make this behave like the solution website.
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
 
-  // console.log('JSON: ', info)
+  // console.log('JSON: ', recipes)
   res.render("index.ejs", {recipes: recipeJSON})
 
 });

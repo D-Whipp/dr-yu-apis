@@ -17,19 +17,21 @@
   </form>
   <div id="recipeContainer" class="hidden">
 
-    <%# if (locals.recipes) { %>
+    <!-- Else, show the recipe name e.g. <h2>Recipe name</h2>-->
+    <% if (locals.recipes) { %>
+      <% const recipes = JSON.parse(locals.recipes) %>
+      <% console.log("Locals Recipes: ", recipes) %>
       <h3>Ingredients:</h3>
       <ul id="ingredientsList">
         <li>Protein name, protein preparation</li>
         <li>Salsa name</li>
         <li>Every other topping</li>
       </ul>
-    <%# } else { %>
+    <% } else { %>
       <!-- If no recipe yet, show: -->
       <h2>Pick your favourite taco ingredient 👆</h2>
-      <!-- Else, show the recipe name e.g. <h2>Recipe name</h2>-->
 
-    <%# } %>
+    <% } %>
 
 
 
