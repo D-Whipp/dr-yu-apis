@@ -24,6 +24,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.use(myLogger);
 
+// const reqLogger = function (req, res, next) {
+//   console.log("Request Method: ", req.method);
+//   console.log("Request URL: ", req.url);
+//   console.log("Request: ", req);
+//   next();
+// }
+
+// app.use(reqLogger);
+
+// const button = document.getElementsByTagName('button');
+// button.addEventListener('click', function(e) {
+//   console.log('Button was clicked!')
+// })
+
 app.get("/", (req, res) => {
   res.render("index.ejs");
 });
@@ -33,7 +47,8 @@ app.post("/recipe", (req, res) => {
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
 
   // console.log('JSON: ', recipes)
-  res.render("index.ejs", {recipes: recipeJSON})
+  console.log("Recipe Req: ", req.body.choice);
+  res.render("index.ejs", {recipes: recipeJSON});
 
 });
 
