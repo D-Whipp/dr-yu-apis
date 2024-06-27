@@ -38,6 +38,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //   console.log('Button was clicked!')
 // })
 
+const customMiddleware = function (req, res, next) {
+  let parsedRecipe = JSON.parse(recipeJSON);
+
+  console.log("Middleware Body: ", req.body.choice)
+  console.log("Middleware fired!");
+  console.log("recipeJSON: ", parsedRecipe[1]);
+  next();
+}
+
+app.use(customMiddleware);
+
 app.get("/", (req, res) => {
   res.render("index.ejs");
 });
@@ -48,7 +59,7 @@ app.post("/recipe", (req, res) => {
 
   // console.log('JSON: ', recipes)
   console.log("Recipe Req: ", req.body.choice);
-  res.render("index.ejs", {recipes: recipeJSON});
+  res.render("index.ejs", {recipes: "Hi"});
 
 });
 
