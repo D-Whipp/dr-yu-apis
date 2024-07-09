@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <h1>Taco Town 🌮</h1>
+  <h1><a href="/">Taco Town 🌮</a></h1>
 
   <form action="/recipe" method="POST" class="buttons">
 
@@ -17,29 +17,26 @@
   </form>
   <div id="recipeContainer" class="hidden">
 
-    <%# const button = document.getElementByTagName('button');%>
-
     <!-- Else, show the recipe name e.g. <h2>Recipe name</h2>-->
-    <%# if (locals.recipes) { %>
-      <%# const recipes = JSON.parse(locals.recipes) %>
-      <%# console.log("Locals Recipes: ", recipes) %>
+    <% if (locals.chosenRecipe) { %>
+      <% console.log("Locals Recipes: ", locals.chosenRecipe) %>
       <h3>Ingredients:</h3>
       <ul id="ingredientsList">
-        <li>
-          <%# recipes[0].ingredients.protein.preparation %>
+        <li><%= locals.chosenRecipe.ingredients.protein.name %>, <%= locals.chosenRecipe.ingredients.protein.preparation %></li>
+        <li><%= locals.chosenRecipe.ingredients.salsa.name %></li>
+
+        <% for (let i = 0; i < locals.chosenRecipe.ingredients.toppings.length; i++) { %>
+        <li><%= locals.chosenRecipe.ingredients.toppings[i].name %>, 
+          <%= locals.chosenRecipe.ingredients.toppings[i].quantity %>,
+          <%= locals.chosenRecipe.ingredients.toppings[i].ingredients %>
         </li>
-        <li>Protein name, protein preparation</li>
-        <li>Salsa name</li>
-        <li>Every other topping</li>
+        <% } %>
       </ul>
-    <%# } else { %>
+    <% } else { %>
       <!-- If no recipe yet, show: -->
       <h2>Pick your favourite taco ingredient 👆</h2>
 
-    <%# } %>
-
-
-
+    <% } %>
 
   </div>
 </body>

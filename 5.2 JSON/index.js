@@ -1,8 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
 
-// import info from './recipe.json' assert {type: 'json'};
-
 const app = express();
 const port = 3000;
 
@@ -14,36 +12,25 @@ const recipeJSON =
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// custom middleware
-// const myLogger = function (req, res, next) {
-//   console.log("LOGGED");
-//   const parsedJSON = JSON.parse(recipeJSON)
-//   console.log("RECIPE LOGGER", parsedJSON)
-//   next();
-// }
-
-// app.use(myLogger);
-
-// const reqLogger = function (req, res, next) {
-//   console.log("Request Method: ", req.method);
-//   console.log("Request URL: ", req.url);
-//   console.log("Request: ", req);
-//   next();
-// }
-
-// app.use(reqLogger);
-
-// const button = document.getElementsByTagName('button');
-// button.addEventListener('click', function(e) {
-//   console.log('Button was clicked!')
-// })
+let payload;
 
 const customMiddleware = function (req, res, next) {
   let parsedRecipe = JSON.parse(recipeJSON);
 
-  console.log("Middleware Body: ", req.body.choice)
-  console.log("Middleware fired!");
-  console.log("recipeJSON: ", parsedRecipe[1]);
+  if (req.body.choice === "chicken") {
+    payload = parsedRecipe[0];
+    // console.log("Payload: ", payload)
+  } else if (req.body.choice === 'beef') {
+    payload = parsedRecipe[1];
+    // console.log('Payload: ', payload);
+  } else if (req.body.choice === 'fish') {
+    payload = parsedRecipe[2];
+    // console.log("Payload: ", payload)
+  } else {
+    next();
+  }
+
+
   next();
 }
 
@@ -58,8 +45,8 @@ app.post("/recipe", (req, res) => {
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
 
   // console.log('JSON: ', recipes)
-  console.log("Recipe Req: ", req.body.choice);
-  res.render("index.ejs", {recipes: "Hi"});
+  // console.log("Recipe Req: ", req.body.choice);
+  res.render("index.ejs", {chosenRecipe: payload});
 
 });
 
