@@ -8,7 +8,7 @@ const API_URL = 'https://secrets-api.appbrewery.com/';
 //TODO 1: Fill in your values for the 3 types of auth.
 const yourUsername = 'newmonsterhunteruser';
 const yourPassword = '123456b';
-const yourAPIKey = 'a0e4f1e3-d618-4bab-b7e4-010a4b90e026';
+const yourAPIKey = '4364020a-b30f-4919-aa00-cefdf120b747';
 const yourBearerToken = 'd4a46a1a-8d3f-4c6c-b277-0236af50d65f';
 
 app.get('/', (req, res) => {
@@ -80,10 +80,27 @@ app.get('/basicAuth', async (req, res) => {
   }
 });
 
-app.get('/apiKey', (req, res) => {
+app.get('/apiKey', async (req, res) => {
   //TODO 4: Write your code here to hit up the /filter endpoint
   //Filter for all secrets with an embarassment score of 5 or greater
   //HINT: You need to provide a query parameter of apiKey in the request.
+
+  try {
+    const response = await axios
+      .get(
+        `https://secrets-api.appbrewery.com/filter?score=5&apiKey=a0e4f1e3-d618-4bab-b7e4-010a4b90e026`
+      )
+      .then(function (response) {
+        const result = JSON.stringify(response.data);
+        console.log('API KEY Result: ', result);
+        res.render('index.ejs', { content: result });
+      })
+      .catch(function (error) {
+        console.log('AXIOS ERROR: ', error);
+      });
+  } catch (error) {
+    console.log('TRY ERROR: ', error);
+  }
 });
 
 app.get('/bearerToken', (req, res) => {
