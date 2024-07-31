@@ -2,7 +2,7 @@ import express from 'express';
 import axios from 'axios';
 
 const app = express();
-const port = 3000;
+const port = 5000;
 const API_URL = 'https://secrets-api.appbrewery.com';
 
 // TODO: Replace the values below with your own before running this file.
